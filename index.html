@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CalmSpace</title>
+<link rel="icon" type="image/png" href="D:\chhavi\Screenshot 2025-09-10 140945.png">
+<style>
+:root {
+  --primary: #1e6f7c;
+  --secondary: #fdfcf7;
+  --accent: #5ec9d8;
+  --light-bg: #e6f7f7;
+  --gradient: linear-gradient(135deg, #1e6f7c, #5ec9d8);
+  --text: #333;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  --hover-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--secondary); color: var(--text); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--gradient); color: #fff; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+header h1 { display: flex; align-items: center; gap:0.5rem; font-size: 1.5rem; }
+nav a { margin: 0 0.7rem; text-decoration: none; color: #fff; font-weight: 500; transition: all 0.3s; cursor:pointer; }
+nav a:hover { color: #ffefba; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+section { padding: 5rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
+section:nth-child(even) { background: var(--light-bg); }
+h2 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary); }
+.hero { height: 90vh; background: linear-gradient(120deg, #1e6f7c, #5ec9d8, #89f7fe); background-size: 400% 400%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; animation: gradientShift 10s ease infinite; }
+.hero h2 { font-size: 3rem; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+.hero p { max-width: 700px; margin: 1rem auto; font-size: 1.2rem; }
+.hero button { font-size: 1.2rem; padding: 1rem 2rem; box-shadow: 0 0 15px rgba(255,255,255,0.6); cursor:pointer; }
+.card { background: #fff; padding: 1.5rem; margin: 1rem; border-radius: 16px; box-shadow: var(--card-shadow); transition: transform 0.3s, box-shadow 0.3s; animation: fadeUp 1s ease forwards; opacity: 0; }
+.card:hover { transform: translateY(-10px) scale(1.03); box-shadow: var(--hover-shadow); }
+.grid { display: grid; gap: 1.5rem; }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+button { background: var(--gradient); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: 25px; cursor: pointer; margin: 0.3rem; font-size: 1rem; transition: all 0.3s; }
+button:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(94,201,216,0.8); }
+footer { background: var(--gradient); color: #fff; padding: 1.5rem; text-align: center; font-size: 0.9rem; }
+input, textarea { width: 100%; padding: 0.7rem; margin-bottom: 0.8rem; border: 1px solid #ccc; border-radius: 8px; }
+img.logo { height: 45px; border-radius: 8px; }
+.feedback-list { margin-top: 1rem; text-align:left; max-width:500px; margin-left:auto; margin-right:auto; }
+p{color: #333;}
+.blog-post {
+  text-align: left;
+  margin-bottom: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+.blog-post h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.blog-post .meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.blog-post img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+/* Product specific styles */
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+}
+.product-image {
+  height: 220px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--primary);
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.product-title {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin: 0.5rem 0;
+}
+.product-description {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+.product-features {
+  margin-bottom: 1rem;
+}
+.product-features ul {
+  padding-left: 20px;
+}
+.product-features li {
+  margin-bottom: 0.3rem;
+}
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quantity-selector {
+  display: flex;
+  align-items: center;
+}
+.quantity-selector button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+.quantity-selector span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s;
+}
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  animation: slideIn 0.3s;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.close:hover {
+  color: #000;
+}
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.form-group button {
+  width: 100%;
+  margin-top: 1rem;
+}
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff5252;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.cart-modal {
+  width: 90%;
+  max-width: 800px;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.cart-item-details {
+  flex-grow: 1;
+  padding: 0 1rem;
+  text-align: left;
+}
+.cart-item-price {
+  font-weight: bold;
+  color: var(--accent);
+}
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #eee;
+}
+/* Membership plans styles */
+.membership-plans {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+.membership-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.membership-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+}
+.membership-card.featured {
+  border: 2px solid var(--accent);
+  position: relative;
+}
+.membership-card.featured::before {
+  content: "BEST VALUE";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.membership-title {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.membership-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.membership-price span {
+  font-size: 1rem;
+  color: var(--text);
+}
+.membership-features {
+  text-align: left;
+  margin: 1.5rem 0;
+  flex-grow: 1;
+}
+.membership-features ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.membership-features li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.membership-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+.membership-button {
+  margin-top: auto;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+/* Founders section styles */
+.founders-section {
+  margin-top: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+}
+.founders-title {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+.founders-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+.founder-card {
+  background: var(--light-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  flex: 0 0 auto;
+  width: 165px;
+}
+.founder-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+.founder-image {
+  height: 150px;
+  overflow: hidden;
+}
+.founder-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.founder-card:hover .founder-image img {
+  transform: scale(1.05);
+}
+.founder-info {
+  padding: 1rem;
+}
+.founder-name {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+.founder-title {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+/* Community Post Styles */
+.community-modal {
+  width: 90%;
+  max-width: 800px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+.community-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.community-tabs {
+  display: flex;
+  gap: 1rem;
+}
+.community-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.community-tab.active {
+  background: var(--gradient);
+  color: white;
+}
+.community-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.create-post {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+.create-post textarea {
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+.create-post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: left;
+}
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--light-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+.post-user-info {
+  flex-grow: 1;
+}
+.post-username {
+  font-weight: bold;
+  color: var(--primary);
+}
+.post-time {
+  font-size: 0.8rem;
+  color: #666;
+}
+.post-content {
+  margin-bottom: 1rem;
+}
+.post-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.post-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+}
+.post-action:hover {
+  color: var(--accent);
+}
+.post-action.liked {
+  color: #ff5252;
+}
+.post-action.reposted {
+  color: var(--accent);
+}
+.post-comments {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.comment {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.comment-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--light-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.8rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+.comment-content {
+  flex-grow: 1;
+  background: #f9f9f9;
+  padding: 0.8rem;
+  border-radius: 12px;
+}
+.comment-username {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: var(--primary);
+}
+.comment-text {
+  font-size: 0.9rem;
+}
+.add-comment {
+  display: flex;
+  margin-top: 1rem;
+}
+.add-comment input {
+  flex-grow: 1;
+  margin-right: 0.5rem;
+}
+/* Games Styles */
+.games-modal {
+  width: 90%;
+  max-width: 800px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+.game-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.game-title {
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+.game-selector {
+  display: flex;
+  gap: 0.5rem;
+}
+.game-selector button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+/* Bubble Wrap Game */
+.bubble-wrap-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  width: 100%;
+  max-width: 500px;
+}
+.bubble {
+  aspect-ratio: 1;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #e0e0e0);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.bubble:hover {
+  transform: scale(1.05);
+}
+.bubble.popped {
+  background: radial-gradient(circle at 30% 30%, #f0f0f0, #d0d0d0);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+  transform: scale(0.9);
+}
+/* Connect Dots Game */
+.connect-dots-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.dot {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+.dot.red { background-color: #ff5252; }
+.dot.blue { background-color: #2196f3; }
+.dot.green { background-color: #4caf50; }
+.dot.yellow { background-color: #ffeb3b; }
+.dot.selected {
+  border: 3px solid #333;
+  transform: scale(1.2);
+}
+.line {
+  position: absolute;
+  background-color: #333;
+  height: 3px;
+  transform-origin: left center;
+  z-index: 1;
+}
+/* Breathing Game */
+.breathing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+}
+.breathing-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--gradient);
+  margin: 2rem 0;
+  transition: transform 4s ease-in-out;
+}
+.breathing-circle.inhale {
+  transform: scale(1.5);
+}
+.breathing-circle.exhale {
+  transform: scale(1);
+}
+.breathing-instructions {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+.breathing-timer {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+</style>
+<script>
+// Cart functionality
+let cart = [];
+let cartTotal = 0;
+// Product data
+const products = [
+  {
+    id: 1,
+    name: "CalmSpace Aroma Oil(20ml)",
+    price: 249,
+    description: "A soothing blend of pure coconut oil infused with lavender and eucalyptus essential oils.",
+    emoji: "🧴",
+    details: "Transparent base with a slight golden tint comes in a transparent bottle with light brown cork",
+    features: [
+      "100% natural and skin-safe carrier base (coconut oil)",
+      "Long-lasting fragrance release through diffusion",
+      "Blended for stress relief, relaxation, and focus"
+    ],
+    materials: [
+      "Coconut Oil (base carrier oil, natural moisturizer)",
+      "Lavender Essential Oil (calming floral aroma)",
+      "Eucalyptus Essential Oil (fresh, minty aroma)"
+    ],
+    advantages: [
+      "Lavender: Calms nerves, reduces anxiety, promotes restful sleep",
+      "Eucalyptus: Clears the mind, improves breathing, uplifts mood",
+      "Coconut Oil: Gentle, nourishing base that balances the aroma intensity"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/07b75125-b77b-485a-a0b2-948de2b8ea0a_oil.jpeg?auth_key=1789723386-2b9a48ca538f4061bc6bfad6caef890b-0-ff6539c5747b2d34a369b22ea5617e1c"
+  },
+  {
+    id: 2,
+    name: "Calmspace Journal",
+    price: 249,
+    description: "A compact journal designed to help track emotions, thoughts, and daily reflections.",
+    emoji: "📓",
+    details: "Soft beige pages with CalmSpace branding on the cover page",
+    features: [
+      "20-30 pages, easy to carry",
+      "Guided prompts inside"
+    ],
+    materials: [
+      "Recycled paper, matte cover"
+    ],
+    advantages: [
+      "Boosts self-awareness",
+      "Helps reduce stress",
+      "Sustainable"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/54e94a8d-8ba6-48d1-91e3-365a395b2ec2_journal.jpg?auth_key=1789723386-1651c28706334eb39d96f13a1e19b8d3-0-a56b5c102675d096bc03d7de20e13310"
+  },
+  {
+    id: 3,
+    name: "Affirmation Cards",
+    price: 149,
+    description: "A set of 8 cards with positive, uplifting quotes for daily motivation.",
+    emoji: "💬",
+    details: "Beige aesthetic background with minimal design",
+    features: [
+      "Compact, single sided",
+      "Durable print"
+    ],
+    materials: [
+      "Thick card paper"
+    ],
+    advantages: [
+      "Encourages positivity",
+      "Can be pinned or carried daily"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/b2d3ba41-4254-49be-ab7b-91dfabf9d906_cards.jpeg?auth_key=1789723386-e13aa7222f054be5a0cb7d433f38251a-0-027fdcb74703f4b511d820622c82fb71"
+  },
+  {
+    id: 4,
+    name: "Mandala Coloring Book",
+    price: 249,
+    description: "A calming activity book with hand-drawn mandalas to color and de-stress.",
+    emoji: "🎨",
+    details: "Black & white outlines on smooth paper",
+    features: [
+      "5+ unique mandalas",
+      "Compact, easy to carry"
+    ],
+    materials: [
+      "Paper (120 GSM)",
+      "Printed covers"
+    ],
+    advantages: [
+      "Mindful activity",
+      "Reduces anxiety",
+      "Improves focus"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/7986d66e-6561-4887-af08-73a0e92188aa_mandala%20book.jpeg?auth_key=1789723386-3f4afeb5835640cabfa89dbc68f76168-0-48ef8eb6f6bafd68ebb5cfc528a24645"
+  },
+  {
+    id: 5,
+    name: "CalmSpace Rose Glow Candle",
+    price: 199,
+    description: "A hand-poured mini candle enriched with dried rose petals and a soothing rose fragrance.",
+    emoji: "🕯",
+    details: "White wax with delicate rose petals embedded for a natural, aesthetic look",
+    features: [
+      "Long-lasting burn (approx. 8–10 hours)",
+      "Mild yet refreshing rose aroma",
+      "Comes in a reusable glass jar",
+      "Beautiful rose petal touch — doubles as décor"
+    ],
+    materials: [
+      "Paraffin wax blend",
+      "Cotton wick (eco-friendly)",
+      "Natural rose fragrance oil",
+      "Dried rose petals"
+    ],
+    advantages: [
+      "Rose Aroma: Promotes relaxation, reduces stress, and uplifts mood",
+      "Aromatherapy Benefits: Rose scent is known to reduce anxiety, balance emotions, and create a sense of comfort",
+      "Petal Infusion: Enhances the candle's look and makes it more luxurious",
+      "Daily Ritual: Ideal for meditation, journaling, or simply unwinding",
+      "Reusable Jar: Can be repurposed after the candle is finished"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/f6ec79c2-9083-43d3-b262-22e73a7350cc_candle.jpeg?auth_key=1789723386-53628e08858c487796a5fb7e9edc675d-0-cc0f891b78338668b3c2e6e6bc618f98"
+  },
+  {
+    id: 6,
+    name: "CalmSpace Grow Kit",
+    price: 199,
+    description: "A beginner-friendly mini gardening kit with a packet of seeds and a small eco-friendly pot.",
+    emoji: "🌱",
+    details: "Natural brown (pot), assorted brownish small seeds",
+    features: [
+      "Easy-to-grow seeds (basil, tulsi, marigold, or microgreens)",
+      "Biodegradable mini pot — no mess, eco-conscious",
+      "Compact and desk-friendly size",
+      "Quick germination within 7–10 days"
+    ],
+    materials: [
+      "Seed packet containing flowering seeds",
+      "Biodegradable pot",
+      "Organic soil mix"
+    ],
+    advantages: [
+      "Stress Relief: Nurturing plants is a proven mindfulness activity that reduces anxiety",
+      "Green Touch: Adds freshness and life to your desk or room",
+      "Eco-Friendly: 100% biodegradable and sustainable",
+      "Growth Reminder: Watching seeds sprout serves as a daily symbol of patience and positivity",
+      "Low Maintenance: Perfect even for beginners with 'no green thumb'"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/8a24a705-bd99-4410-8cfb-cc9ee9f2cdd5_grow%20kit.jpeg?auth_key=1789723386-19d990e760554c8bb6d917be90da7564-0-4406d2929f70a4c8b85635fddb9b8798"
+  },
+  {
+    id: 7,
+    name: "Calm Space Stress Ball",
+    price: 149,
+    description: "A soft, squeezable stress ball designed to release tension, improve focus, and provide instant relaxation.",
+    emoji: "🧘",
+    details: "Soothing shades like sky blue, pastel green, lavender, or soft peach",
+    features: [
+      "Ergonomic size for comfortable grip",
+      "Lightweight, portable, and durable",
+      "Can be used during study, work, or meditation breaks",
+      "Gentle hand exercise improves blood circulation"
+    ],
+    materials: [
+      "Outer layer: Non-toxic, skin-safe sponge",
+      "Filling: Soft foam for smooth squeeze"
+    ],
+    advantages: [
+      "Reduces stress and anxiety instantly",
+      "Helps improve concentration and mindfulness",
+      "Strengthens hand muscles and relieves tension",
+      "Compact and reusable — carry anywhere",
+      "Complements Calm Space products like candles for a full relaxation kit"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/12ea8a45-2ae8-46d3-a961-453613ca0d6e_stress%20ball.jpeg?auth_key=1789723386-fd34b76dd0604817b4cf44eebe0ddcb1-0-a9aa4123b0418d7eb531a33f12d8fe84"
+  },
+  {
+    id: 8,
+    name: "CalmSpace Kit",
+    price: 1299,
+    description: "The ultimate wellness bundle that includes all our premium products for complete mind and body relaxation.",
+    emoji: "🎁",
+    details: "Beautifully packaged gift box containing all CalmSpace products",
+    features: [
+      "Includes all 7 CalmSpace products",
+      "Comes with a guided wellness journal",
+      "Special membership discount included",
+      "Perfect gift for loved ones"
+    ],
+    materials: [
+      "Eco-friendly packaging",
+      "All individual product materials"
+    ],
+    advantages: [
+      "Complete wellness solution in one package",
+      "Great value compared to purchasing individually",
+      "Curated experience for maximum relaxation",
+      "Beautiful presentation for gifting"
+    ],
+    image: "https://z-cdn-media.chatglm.cn/files/341b0165-085c-4077-a312-512794034f10_box.jpeg?auth_key=1789723386-83361f8583ac4f5d829016a6574eb611-0-e883591e0a1e12d8df495d53cbe36b1f"
+  }
+];
+
+// Community posts data
+let communityPosts = [
+  {
+    id: 1,
+    username: "WellnessWarrior",
+    avatar: "WW",
+    time: "2 hours ago",
+    content: "Just completed my 30-day mindfulness challenge with CalmSpace products! The aroma oil and journal have been game-changers for my morning routine. Feeling more centered and peaceful than ever before. #MindfulnessJourney #CalmSpace",
+    likes: 24,
+    reposts: 5,
+    liked: false,
+    reposted: false,
+    comments: [
+      {
+        username: "PeacefulSoul",
+        avatar: "PS",
+        text: "That's amazing! I'm on day 15 of my challenge. The breathing exercises have been so helpful."
+      },
+      {
+        username: "ZenMaster",
+        avatar: "ZM",
+        text: "Love to hear this! Which product was your favorite?"
+      }
+    ]
+  },
+  {
+    id: 2,
+    username: "AnxietyFree",
+    avatar: "AF",
+    time: "5 hours ago",
+    content: "The CalmSpace stress ball has been my savior during work meetings. I used to get so anxious during presentations, but now I just squeeze it under the table and it helps me stay focused and calm. Highly recommend for anyone with work-related stress!",
+    likes: 42,
+    reposts: 12,
+    liked: false,
+    reposted: false,
+    comments: [
+      {
+        username: "OfficeYogi",
+        avatar: "OY",
+        text: "I need to try this! My work stress has been through the roof lately."
+      }
+    ]
+  },
+  {
+    id: 3,
+    username: "NatureLover",
+    avatar: "NL",
+    time: "1 day ago",
+    content: "My CalmSpace grow kit sprouted today! There's something so therapeutic about watching new life grow. It's become a daily mindfulness practice for me - checking on the seedlings and taking a few deep breaths. Small moments of joy make all the difference. 🌱",
+    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    likes: 67,
+    reposts: 18,
+    liked: false,
+    reposted: false,
+    comments: []
+  }
+];
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function() {
+  renderProducts();
+  updateCartCount();
+  
+  // Add event listeners
+  document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+  document.getElementById('signupBtn').addEventListener('click', openSignupModal);
+  document.getElementById('cartIcon').addEventListener('click', openCartModal);
+  
+  // Close modals when clicking outside
+  window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.style.display = 'none';
+    }
+  });
+});
+// Render products on the page
+function renderProducts() {
+  const productsContainer = document.getElementById('productsContainer');
+  productsContainer.innerHTML = '';
+  
+  products.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.className = 'product-card';
+    productCard.innerHTML = `
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}">
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">${product.name}</h3>
+        <p class="product-description">${product.description}</p>
+        <div class="product-features">
+          <h4>Key Features:</h4>
+          <ul>
+            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+          </ul>
+        </div>
+        <p class="product-price">₹${product.price}</p>
+        <div class="product-actions">
+          <div class="quantity-selector">
+            <button onclick="decreaseQuantity(${product.id})">-</button>
+            <span id="quantity-${product.id}">1</span>
+            <button onclick="increaseQuantity(${product.id})">+</button>
+          </div>
+          <button onclick="addToCart(${product.id})">Add to Cart</button>
+        </div>
+      </div>
+    `;
+    productsContainer.appendChild(productCard);
+  });
+}
+// Quantity selector functions
+function increaseQuantity(productId) {
+  const quantityElement = document.getElementById(`quantity-${productId}`);
+  let quantity = parseInt(quantityElement.innerText);
+  quantity++;
+  quantityElement.innerText = quantity;
+}
+function decreaseQuantity(productId) {
+  const quantityElement = document.getElementById(`quantity-${productId}`);
+  let quantity = parseInt(quantityElement.innerText);
+  if (quantity > 1) {
+    quantity--;
+    quantityElement.innerText = quantity;
+  }
+}
+// Add product to cart
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  const quantity = parseInt(document.getElementById(`quantity-${productId}`).innerText);
+  
+  // Check if product is already in cart
+  const existingItemIndex = cart.findIndex(item => item.id === productId);
+  
+  if (existingItemIndex !== -1) {
+    // Update quantity if product already exists in cart
+    cart[existingItemIndex].quantity += quantity;
+  } else {
+    // Add new item to cart
+    cart.push({
+      ...product,
+      quantity: quantity
+    });
+  }
+  
+  // Reset quantity selector
+  document.getElementById(`quantity-${productId}`).innerText = 1;
+  
+  // Update cart count and total
+  updateCartCount();
+  
+  // Show notification
+  showNotification(`${product.name} added to cart!`);
+}
+// Update cart count and total
+function updateCartCount() {
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+  document.getElementById('cartCount').innerText = cartCount;
+  
+  cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+// Modal functions
+function openLoginModal() {
+  document.getElementById('loginModal').style.display = 'block';
+}
+function openSignupModal() {
+  document.getElementById('signupModal').style.display = 'block';
+}
+function openCartModal() {
+  renderCartItems();
+  document.getElementById('cartModal').style.display = 'block';
+}
+function openCommunityModal() {
+  document.getElementById('communityModal').style.display = 'block';
+  renderCommunityPosts();
+}
+function openGamesModal() {
+  document.getElementById('gamesModal').style.display = 'block';
+  initializeBubbleWrapGame();
+}
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+// Render cart items in cart modal
+function renderCartItems() {
+  const cartItemsContainer = document.getElementById('cartItems');
+  cartItemsContainer.innerHTML = '';
+  
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+    document.getElementById('cartTotal').innerHTML = '';
+    return;
+  }
+  
+  cart.forEach(item => {
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+      <div><img src="${item.image}" alt="${item.name}"></div>
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p>₹${item.price} x ${item.quantity}</p>
+      </div>
+      <div class="cart-item-price">₹${item.price * item.quantity}</div>
+      <button onclick="removeFromCart(${item.id})">Remove</button>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+  
+  document.getElementById('cartTotal').innerHTML = `
+    <div class="cart-total">
+      <span>Total:</span>
+      <span>₹${cartTotal}</span>
+    </div>
+    <button onclick="checkout()" style="width: 100%; margin-top: 1rem;">Checkout</button>
+  `;
+}
+// Remove item from cart
+function removeFromCart(productId) {
+  cart = cart.filter(item => item.id !== productId);
+  updateCartCount();
+  renderCartItems();
+  showNotification('Item removed from cart');
+}
+// Checkout function
+function checkout() {
+  if (cart.length === 0) {
+    showNotification('Your cart is empty');
+    return;
+  }
+  
+  // In a real application, this would process the payment
+  showNotification(`Order placed successfully! Total: ₹${cartTotal}`);
+  cart = [];
+  updateCartCount();
+  closeModal('cartModal');
+}
+// Login function
+function login() {
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  if (!email || !password) {
+    showNotification('Please fill in all fields');
+    return;
+  }
+  
+  // In a real application, this would authenticate the user
+  showNotification('Login successful!');
+  closeModal('loginModal');
+  
+  // Update UI to show logged in state
+  document.getElementById('authButtons').innerHTML = `
+    <span>Welcome, ${email}</span>
+    <button onclick="logout()">Logout</button>
+  `;
+}
+// Signup function
+function signup() {
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  
+  if (!name || !email || !password || !confirmPassword) {
+    showNotification('Please fill in all fields');
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    showNotification('Passwords do not match');
+    return;
+  }
+  
+  // In a real application, this would create a new user account
+  showNotification('Account created successfully!');
+  closeModal('signupModal');
+  
+  // Update UI to show logged in state
+  document.getElementById('authButtons').innerHTML = `
+    <span>Welcome, ${name}</span>
+    <button onclick="logout()">Logout</button>
+  `;
+}
+// Logout function
+function logout() {
+  // In a real application, this would clear the session
+  showNotification('Logged out successfully');
+  
+  // Update UI to show logged out state
+  document.getElementById('authButtons').innerHTML = `
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+  `;
+  
+  // Re-add event listeners
+  document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+  document.getElementById('signupBtn').addEventListener('click', openSignupModal);
+}
+// Submit feedback
+function submitFeedback() {
+  const name = document.getElementById('feedbackName').value;
+  const text = document.getElementById('feedbackText').value;
+  
+  if(name && text){
+    const feedbackList = document.getElementById('feedbackList');
+    const newFeedback = document.createElement('p');
+    newFeedback.innerHTML = `<strong>${name}:</strong> ${text}`;
+    feedbackList.appendChild(newFeedback);
+    document.getElementById('feedbackName').value = '';
+    document.getElementById('feedbackText').value = '';
+    showNotification('Feedback submitted successfully!');
+  } else {
+    showNotification('Please fill both name and feedback.');
+  }
+}
+// Join membership - quarterly
+function joinQuarterlyMembership() {
+  showNotification("Quarterly Membership Activated. Price: 1299 Rs");
+}
+// Join membership - yearly
+function joinYearlyMembership() {
+  showNotification("Yearly Membership Activated. Price: 3499 Rs");
+}
+// Show notification
+function showNotification(message) {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.style.position = 'fixed';
+  notification.style.bottom = '20px';
+  notification.style.right = '20px';
+  notification.style.backgroundColor = 'var(--primary)';
+  notification.style.color = 'white';
+  notification.style.padding = '1rem';
+  notification.style.borderRadius = '8px';
+  notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+  notification.style.zIndex = '1001';
+  notification.style.animation = 'slideIn 0.3s, fadeOut 0.3s 2.7s';
+  notification.innerText = message;
+  
+  // Add fadeOut animation
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Add to DOM
+  document.body.appendChild(notification);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+// Scroll to section
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+// Add animation on scroll
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.card, .product-card, .founders-section').forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 50) { 
+      card.style.opacity = 1; 
+    }
+  });
+});
+
+// Community Functions
+function renderCommunityPosts() {
+  const postsContainer = document.getElementById('communityPosts');
+  postsContainer.innerHTML = '';
+  
+  // Add create post form
+  const createPost = document.createElement('div');
+  createPost.className = 'create-post';
+  createPost.innerHTML = `
+    <h3>Create a Post</h3>
+    <textarea id="newPostContent" placeholder="Share your wellness journey..."></textarea>
+    <div class="create-post-actions">
+      <button onclick="createNewPost()">Post</button>
+    </div>
+  `;
+  postsContainer.appendChild(createPost);
+  
+  // Add existing posts
+  communityPosts.forEach(post => {
+    const postElement = document.createElement('div');
+    postElement.className = 'post';
+    postElement.innerHTML = `
+      <div class="post-header">
+        <div class="post-avatar">${post.avatar}</div>
+        <div class="post-user-info">
+          <div class="post-username">${post.username}</div>
+          <div class="post-time">${post.time}</div>
+        </div>
+      </div>
+      <div class="post-content">${post.content}</div>
+      ${post.image ? `<img src="${post.image}" alt="Post image" class="post-image">` : ''}
+      <div class="post-actions">
+        <div class="post-action ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+          <span>${post.liked ? '❤️' : '🤍'}</span>
+          <span>${post.likes}</span>
+        </div>
+        <div class="post-action ${post.reposted ? 'reposted' : ''}" onclick="toggleRepost(${post.id})">
+          <span>${post.reposted ? '🔄' : '⤴️'}</span>
+          <span>${post.reposts}</span>
+        </div>
+        <div class="post-action" onclick="toggleComments(${post.id})">
+          <span>💬</span>
+          <span>${post.comments.length}</span>
+        </div>
+      </div>
+      <div class="post-comments" id="comments-${post.id}" style="display: none;">
+        ${post.comments.map(comment => `
+          <div class="comment">
+            <div class="comment-avatar">${comment.avatar}</div>
+            <div class="comment-content">
+              <div class="comment-username">${comment.username}</div>
+              <div class="comment-text">${comment.text}</div>
+            </div>
+          </div>
+        `).join('')}
+        <div class="add-comment">
+          <input type="text" id="comment-input-${post.id}" placeholder="Add a comment...">
+          <button onclick="addComment(${post.id})">Post</button>
+        </div>
+      </div>
+    `;
+    postsContainer.appendChild(postElement);
+  });
+}
+
+function createNewPost() {
+  const content = document.getElementById('newPostContent').value.trim();
+  
+  if (!content) {
+    showNotification('Please write something for your post');
+    return;
+  }
+  
+  // Create new post object
+  const newPost = {
+    id: communityPosts.length + 1,
+    username: "You",
+    avatar: "ME",
+    time: "Just now",
+    content: content,
+    likes: 0,
+    reposts: 0,
+    liked: false,
+    reposted: false,
+    comments: []
+  };
+  
+  // Add to posts array
+  communityPosts.unshift(newPost);
+  
+  // Clear input
+  document.getElementById('newPostContent').value = '';
+  
+  // Re-render posts
+  renderCommunityPosts();
+  
+  showNotification('Your post has been published!');
+}
+
+function toggleLike(postId) {
+  const post = communityPosts.find(p => p.id === postId);
+  if (post) {
+    post.liked = !post.liked;
+    post.likes += post.liked ? 1 : -1;
+    renderCommunityPosts();
+  }
+}
+
+function toggleRepost(postId) {
+  const post = communityPosts.find(p => p.id === postId);
+  if (post) {
+    post.reposted = !post.reposted;
+    post.reposts += post.reposted ? 1 : -1;
+    renderCommunityPosts();
+    
+    if (post.reposted) {
+      showNotification('You reposted this post');
+    }
+  }
+}
+
+function toggleComments(postId) {
+  const commentsSection = document.getElementById(`comments-${postId}`);
+  if (commentsSection.style.display === 'none') {
+    commentsSection.style.display = 'block';
+  } else {
+    commentsSection.style.display = 'none';
+  }
+}
+
+function addComment(postId) {
+  const input = document.getElementById(`comment-input-${postId}`);
+  const text = input.value.trim();
+  
+  if (!text) {
+    showNotification('Please write a comment');
+    return;
+  }
+  
+  const post = communityPosts.find(p => p.id === postId);
+  if (post) {
+    const newComment = {
+      username: "You",
+      avatar: "ME",
+      text: text
+    };
+    
+    post.comments.push(newComment);
+    input.value = '';
+    renderCommunityPosts();
+  }
+}
+
+// Games Functions
+function switchGame(gameName) {
+  const gameContainer = document.getElementById('gameContainer');
+  gameContainer.innerHTML = '';
+  
+  switch(gameName) {
+    case 'bubbleWrap':
+      initializeBubbleWrapGame();
+      break;
+    case 'connectDots':
+      initializeConnectDotsGame();
+      break;
+    case 'breathing':
+      initializeBreathingGame();
+      break;
+  }
+}
+
+function initializeBubbleWrapGame() {
+  const gameContainer = document.getElementById('gameContainer');
+  gameContainer.innerHTML = `
+    <div class="game-header">
+      <h3 class="game-title">Bubble Wrap Game</h3>
+      <div class="game-selector">
+        <button onclick="switchGame('bubbleWrap')">Bubble Wrap</button>
+        <button onclick="switchGame('connectDots')">Connect Dots</button>
+        <button onclick="switchGame('breathing')">Breathing</button>
+      </div>
+    </div>
+    <div class="bubble-wrap-container" id="bubbleWrapContainer"></div>
+    <p>Click on the bubbles to pop them!</p>
+  `;
+  
+  const container = document.getElementById('bubbleWrapContainer');
+  const bubbleCount = 100;
+  
+  for (let i = 0; i < bubbleCount; i++) {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.addEventListener('click', function() {
+      if (!this.classList.contains('popped')) {
+        this.classList.add('popped');
+        playPopSound();
+      }
+    });
+    container.appendChild(bubble);
+  }
+}
+
+function playPopSound() {
+  // Create an audio context for the pop sound
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  oscillator.type = 'sine';
+  oscillator.frequency.value = 300 + Math.random() * 200;
+  gainNode.gain.value = 0.3;
+  
+  oscillator.start();
+  
+  // Fade out the sound
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+  
+  oscillator.stop(audioContext.currentTime + 0.1);
+}
+
+function initializeConnectDotsGame() {
+  const gameContainer = document.getElementById('gameContainer');
+  gameContainer.innerHTML = `
+    <div class="game-header">
+      <h3 class="game-title">Connect the Dots</h3>
+      <div class="game-selector">
+        <button onclick="switchGame('bubbleWrap')">Bubble Wrap</button>
+        <button onclick="switchGame('connectDots')">Connect Dots</button>
+        <button onclick="switchGame('breathing')">Breathing</button>
+      </div>
+    </div>
+    <div class="connect-dots-container" id="connectDotsContainer"></div>
+    <p>Connect dots of the same color by clicking on them!</p>
+  `;
+  
+  const container = document.getElementById('connectDotsContainer');
+  const colors = ['red', 'blue', 'green', 'yellow'];
+  const dotsCount = 20;
+  const dots = [];
+  
+  // Create dots
+  for (let i = 0; i < dotsCount; i++) {
+    const dot = document.createElement('div');
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    dot.className = `dot ${color}`;
+    dot.style.left = `${Math.random() * 90}%`;
+    dot.style.top = `${Math.random() * 90}%`;
+    dot.dataset.color = color;
+    dot.dataset.id = i;
+    
+    dot.addEventListener('click', function() {
+      handleDotClick(this);
+    });
+    
+    container.appendChild(dot);
+    dots.push(dot);
+  }
+  
+  // Store dots globally for game logic
+  window.connectDotsGame = {
+    dots: dots,
+    selectedDots: [],
+    lines: []
+  };
+}
+
+function handleDotClick(dot) {
+  const game = window.connectDotsGame;
+  
+  if (dot.classList.contains('selected')) {
+    // Deselect the dot
+    dot.classList.remove('selected');
+    game.selectedDots = game.selectedDots.filter(d => d !== dot);
+  } else {
+    // Select the dot
+    dot.classList.add('selected');
+    game.selectedDots.push(dot);
+    
+    // Check if we have at least 2 dots of the same color
+    if (game.selectedDots.length >= 2) {
+      const lastDot = game.selectedDots[game.selectedDots.length - 1];
+      const prevDot = game.selectedDots[game.selectedDots.length - 2];
+      
+      if (lastDot.dataset.color === prevDot.dataset.color) {
+        // Draw a line between the dots
+        drawLine(prevDot, lastDot);
+      }
+    }
+  }
+}
+
+function drawLine(dot1, dot2) {
+  const container = document.getElementById('connectDotsContainer');
+  const line = document.createElement('div');
+  line.className = 'line';
+  
+  // Calculate line position and length
+  const rect1 = dot1.getBoundingClientRect();
+  const rect2 = dot2.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  
+  const x1 = rect1.left + rect1.width / 2 - containerRect.left;
+  const y1 = rect1.top + rect1.height / 2 - containerRect.top;
+  const x2 = rect2.left + rect2.width / 2 - containerRect.left;
+  const y2 = rect2.top + rect2.height / 2 - containerRect.top;
+  
+  const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  
+  line.style.width = `${length}px`;
+  line.style.left = `${x1}px`;
+  line.style.top = `${y1}px`;
+  line.style.transform = `rotate(${angle}deg)`;
+  
+  container.appendChild(line);
+  window.connectDotsGame.lines.push(line);
+}
+
+function initializeBreathingGame() {
+  const gameContainer = document.getElementById('gameContainer');
+  gameContainer.innerHTML = `
+    <div class="game-header">
+      <h3 class="game-title">Breathing Exercise</h3>
+      <div class="game-selector">
+        <button onclick="switchGame('bubbleWrap')">Bubble Wrap</button>
+        <button onclick="switchGame('connectDots')">Connect Dots</button>
+        <button onclick="switchGame('breathing')">Breathing</button>
+      </div>
+    </div>
+    <div class="breathing-container">
+      <div class="breathing-circle" id="breathingCircle"></div>
+      <div class="breathing-instructions" id="breathingInstructions">Get ready to breathe...</div>
+      <div class="breathing-timer" id="breathingTimer"></div>
+      <button onclick="startBreathingExercise()">Start Breathing Exercise</button>
+    </div>
+  `;
+}
+
+function startBreathingExercise() {
+  const circle = document.getElementById('breathingCircle');
+  const instructions = document.getElementById('breathingInstructions');
+  const timer = document.getElementById('breathingTimer');
+  
+  // Reset circle state
+  circle.classList.remove('inhale', 'exhale');
+  
+  // Breathing pattern: 4 seconds inhale, 1 second hold, 6 seconds exhale, 1 second hold
+  const breathingPattern = [
+    { phase: 'inhale', duration: 4, instruction: 'Breathe In' },
+    { phase: 'hold', duration: 1, instruction: 'Hold' },
+    { phase: 'exhale', duration: 6, instruction: 'Breathe Out' },
+    { phase: 'hold', duration: 1, instruction: 'Hold' }
+  ];
+  
+  let currentPhase = 0;
+  let timeLeft = 0;
+  
+  function runBreathingCycle() {
+    const phase = breathingPattern[currentPhase];
+    timeLeft = phase.duration;
+    
+    // Update UI
+    instructions.textContent = phase.instruction;
+    timer.textContent = timeLeft;
+    
+    if (phase.phase === 'inhale') {
+      circle.classList.add('inhale');
+      circle.classList.remove('exhale');
+    } else if (phase.phase === 'exhale') {
+      circle.classList.add('exhale');
+      circle.classList.remove('inhale');
+    }
+    
+    // Update timer every second
+    const timerInterval = setInterval(() => {
+      timeLeft--;
+      timer.textContent = timeLeft;
+      
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        
+        // Move to next phase
+        currentPhase = (currentPhase + 1) % breathingPattern.length;
+        
+        // Continue the breathing cycle
+        setTimeout(runBreathingCycle, 100);
+      }
+    }, 1000);
+  }
+  
+  // Start the breathing cycle
+  runBreathingCycle();
+}
+</script>
+</head>
+<body>
+<header>
+<h1><img src="https://z-cdn-media.chatglm.cn/files/741fb1c7-1665-4688-99b3-515478fc2b9d_Screenshot%202025-09-10%20140945.png?auth_key=1789394426-1c9a1ddc172147079d1227fd80efc60f-0-e68f00eca8031a23e858506b9c483a6a" alt="CalmSpace Logo" class="logo"> CalmSpace</h1>
+<nav>
+<a onclick="scrollToSection('home')">Home</a>
+<a onclick="scrollToSection('about')">About Us</a>
+<a onclick="scrollToSection('products')">Products</a>
+<a onclick="scrollToSection('interaction')">Interaction</a>
+<a onclick="scrollToSection('membership')">Membership</a>
+<a onclick="scrollToSection('reviews')">Reviews</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 1rem;">
+  <div class="cart-icon" id="cartIcon">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+  <div id="authButtons">
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+  </div>
+</div>
+</header>
+<section id="home" class="hero">
+<h2>Where peace meets healing.</h2>
+<p>CalmSpace helps people with mental health challenges by offering curated wellness kits, immersive therapies, and a supportive community.</p>
+<button onclick="scrollToSection('products')">✨ Explore CalmSpace ✨</button>
+</section>
+<section id="about">
+<h2>About Us</h2>
+<div class="blog-post">
+  <h3>The Journey of CalmSpace</h3>
+  <div class="meta">Published on September 15, 2023 | By CalmSpace Team</div>
+  <p>CalmSpace was born from a simple yet powerful realization: in our fast-paced world, we all need a sanctuary for our minds. Our founders, a group of wellness enthusiasts and mental health advocates, came together with a shared vision of creating accessible tools for mental well-being.</p>
+  <p>What started as a small collection of handcrafted aromatherapy products has now grown into a comprehensive wellness platform that serves thousands of individuals seeking peace and balance in their daily lives.</p>
+</div>
+<div class="grid grid-2">
+<div class="card">
+<h3> 🌿Our Vision 🌿</h3>
+<p>“To create a world where self-care is simple, accessible, and a part of everyday life. At CalmSpace, we aim to nurture mental well-being through thoughtfully designed products and experiences that bring peace, balance, and joy into people's daily routines. Our vision is to become the trusted companion for stress relief, mindfulness, and holistic wellness.”.</p>
+</div>
+<div class="card">
+<h3>Logo Meaning </h3>
+<img src="https://z-cdn-media.chatglm.cn/files/741fb1c7-1665-4688-99b3-515478fc2b9d_Screenshot%202025-09-10%20140945.png?auth_key=1789394426-1c9a1ddc172147079d1227fd80efc60f-0-e68f00eca8031a23e858506b9c483a6a" alt="CalmSpace Logo" style="width:90px; margin-bottom:10px;">
+<p>The CalmSpace logo features a lotus flower, representing peace, purity, balance, and inner growth.</p>
+</div>
+</div>
+
+<div class="founders-section">
+  <h3 class="founders-title">Meet Our Founders</h3>
+  <div class="founders-grid">
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="https://z-cdn-media.chatglm.cn/files/b7b3735c-cfa8-4f9c-8e61-c1fc0b6ef0b0_WhatsApp%20Image%202025-09-14%20at%2020.15.52.jpeg?auth_key=1789397341-6d0e9777cd72410bbce8641dc4e3493b-0-536dbc896c872a400ed495ede6bb64c2" alt="Chhavi Singh">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Chhavi Singh</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="C:\Users\PC\Downloads\WhatsApp Image 2025-09-14 at 20.35.21.jpeg" alt="Ayushka Rao">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Ayushka Rao</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="C:\Users\PC\Downloads\WhatsApp Image 2025-09-14 at 20.01.59.jpeg" alt="Anshita Vishwakarma">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Anshita Vishwakarma</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="C:\Users\PC\Downloads\WhatsApp Image 2025-09-14 at 21.17.14.jpeg" alt="Nishra Doshi">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Nishra Doshi</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="https://z-cdn-media.chatglm.cn/files/fb2e9b51-2012-4629-b0fd-4357aaa2eb2a_WhatsApp%20Image%202025-09-14%20at%2020.02.19.jpeg?auth_key=1789397341-743d4328404c4d81a411926a8c4a337c-0-a089fe394cff8eda7fd799c15305045f" alt="Elizabeth Mehta">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Elizabeth Mehta</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="https://z-cdn-media.chatglm.cn/files/a9bdfd8d-9469-46ee-b0a2-cca4a80d5e3b_WhatsApp%20Image%202025-09-14%20at%2020.03.29.jpeg?auth_key=1789397341-7ee1cc2836494238acf54d1aa40d98ed-0-c08f4a4cc63809dbdf109118ad457fef" alt="Diksha More">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Diksha More</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-image">
+        <img src="https://z-cdn-media.chatglm.cn/files/44c952cf-639d-4acd-8a80-cf31a52c5d84_WhatsApp%20Image%202025-09-14%20at%2020.05.26.jpeg?auth_key=1789397341-6135a3974d7f4af3bda267a5c480b900-0-846450eae632030b6a9ac5320e6fa1b5" alt="Siddhi Kasurde">
+      </div>
+      <div class="founder-info">
+        <h4 class="founder-name">Siddhi Kasurde</h4>
+        <p class="founder-title">Founder</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section id="products">
+<h2>Our Products</h2>
+<div class="blog-post">
+  <h3>The Science Behind Our Wellness Products</h3>
+  <div class="meta">Published on September 10, 2023 | By CalmSpace Team</div>
+  <p>At CalmSpace, we believe in the power of natural remedies and mindfulness practices to improve mental well-being. Each of our products is carefully crafted based on scientific research and traditional wellness wisdom.</p>
+  <p>From our aromatherapy oils that engage the olfactory system to trigger relaxation responses in the brain, to our journals that promote reflective thinking and emotional processing, every item in our collection serves a specific purpose in your wellness journey.</p>
+</div>
+<div class="grid grid-3" id="productsContainer">
+  <!-- Products will be dynamically inserted here -->
+</div>
+</section>
+<section id="interaction">
+<h2>Interaction</h2>
+<div class="blog-post">
+  <h3>Engaging Your Senses for Better Mental Health</h3>
+  <div class="meta">Published on September 5, 2023 | By CalmSpace Team</div>
+  <p>Mental wellness isn't just about what we think—it's about engaging all our senses in positive, healing experiences. That's why we've created a range of interactive experiences designed to calm your mind, reduce stress, and bring joy to your day.</p>
+  <p>From sound baths that use vibrational therapy to music that's scientifically composed for relaxation, our interactive tools are designed to be both effective and enjoyable.</p>
+</div>
+<div class="grid grid-3">
+<div class="card">
+<h3>Sound Bath</h3>
+<p>Experience a 10-min sound bath trial session.</p>
+<P>(First-Session for Free)</P>
+</div>
+<div class="card">
+<h3>Music Therapy</h3>
+<p>Soothing music therapy sessions to calm your mind.</p>
+</div>
+<div class="card" onclick="openCommunityModal()">
+<h3>Community</h3>
+<p>Connect with others on their wellness journey. Share your experiences, read stories, and find support.</p>
+<button>Join Community</button>
+</div>
+<div class="card" onclick="openGamesModal()">
+<h3>Games</h3>
+<p>Try our stress-relief games for a fun break.</p>
+<button>Play Games</button>
+</div>
+</div>
+</section>
+<section id="membership">
+  <h2>Join Membership</h2>
+  <div class="blog-post">
+    <h3>Investing in Your Long-Term Wellness</h3>
+    <div class="meta">Published on August 28, 2023 | By CalmSpace Team</div>
+    <p>Wellness is not a destination—it's a journey. Our membership programs are designed to support you every step of the way, providing not just products but a comprehensive wellness ecosystem that grows with you.</p>
+    <p>Members enjoy exclusive benefits, personalized recommendations, and access to our community of wellness enthusiasts. Join us in making mental well-being a priority every day.</p>
+  </div>
+  <p>Choose the perfect CalmSpace membership plan for your wellness journey:</p>
+  
+  <div class="membership-plans">
+    <div class="membership-card">
+      <h3 class="membership-title">Quarterly</h3>
+      <div class="membership-price">₹1299 <span>/ 3 months</span></div>
+      <div class="membership-features">
+        <ul>
+          <li>20% off on all CalmSpace products</li>
+          <li>Access to Music Therapy sessions</li>
+          <li>Monthly wellness newsletter</li>
+        </ul>
+      </div>
+      <button class="membership-button" onclick="joinQuarterlyMembership()">Join Quarterly</button>
+    </div>
+    
+    <div class="membership-card featured">
+      <h3 class="membership-title">Yearly</h3>
+      <div class="membership-price">₹3499 <span>/ year</span></div>
+      <div class="membership-features">
+        <ul>
+          <li>Complete CalmSpace Healing Kit (worth ₹1299)</li>
+          <li>Full access to all CalmSpace features</li>
+          <li>30% off on all products</li>
+          <li>Priority access to new features</li>
+          <li>Exclusive community events</li>
+        </ul>
+      </div>
+      <button class="membership-button" onclick="joinYearlyMembership()">Join Yearly</button>
+    </div>
+  </div>
+</section>
+<section id="reviews">
+<h2>Share Your Experience</h2>
+<div class="blog-post">
+  <h3>Your Voice Matters</h3>
+  <div class="meta">Published on August 20, 2023 | By CalmSpace Team</div>
+  <p>At CalmSpace, we believe in the power of shared experiences. Your stories of transformation and healing inspire not only our team but also others who are on their own wellness journeys.</p>
+  <p>We invite you to share how CalmSpace has impacted your life. Your feedback helps us improve and serves as a beacon of hope for others seeking mental wellness solutions.</p>
+</div>
+<p>We'd love to hear from you! Share how CalmSpace helped your wellness journey.</p>
+<input type="text" id="feedbackName" placeholder="Your Name" />
+<textarea id="feedbackText" placeholder="Your Feedback"></textarea>
+<button onclick="submitFeedback()">Submit Feedback</button>
+<div class="feedback-list" id="feedbackList"></div>
+</section>
+<footer>
+<p>&copy; 2025 CalmSpace. All rights reserved.</p>
+</footer>
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <div class="form-group">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" placeholder="Your email">
+    </div>
+    <div class="form-group">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Your password">
+    </div>
+    <div class="form-group">
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+</div>
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('signupModal')">&times;</span>
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <label for="signupName">Full Name</label>
+      <input type="text" id="signupName" placeholder="Your full name">
+    </div>
+    <div class="form-group">
+      <label for="signupEmail">Email</label>
+      <input type="email" id="signupEmail" placeholder="Your email">
+    </div>
+    <div class="form-group">
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" placeholder="Create a password">
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password">
+    </div>
+    <div class="form-group">
+      <button onclick="signup()">Sign Up</button>
+    </div>
+  </div>
+</div>
+<!-- Cart Modal -->
+<div id="cartModal" class="modal cart-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('cartModal')">&times;</span>
+    <h2>Your Cart</h2>
+    <div id="cartItems">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+    <div id="cartTotal">
+      <!-- Cart total will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+<!-- Community Modal -->
+<div id="communityModal" class="modal community-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('communityModal')">&times;</span>
+    <div class="community-header">
+      <h2>CalmSpace Community</h2>
+      <div class="community-tabs">
+        <div class="community-tab active" onclick="switchTab('posts')">Posts</div>
+        <div class="community-tab" onclick="switchTab('trending')">Trending</div>
+      </div>
+    </div>
+    <div class="community-content" id="communityPosts">
+      <!-- Community posts will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+<!-- Games Modal -->
+<div id="gamesModal" class="modal games-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('gamesModal')">&times;</span>
+    <div id="gameContainer">
+      <!-- Game content will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+</body>
+</html>
